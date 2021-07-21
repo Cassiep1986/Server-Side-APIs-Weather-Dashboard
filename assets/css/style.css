@@ -1,0 +1,14 @@
+* {
+    font-family: Arial, Helvetica, sans-serif
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    background: linear-gradient(to right, blue, darkblue);
+}
+
+h3 {
+    font-weight: bold;
+}
+
