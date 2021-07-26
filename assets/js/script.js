@@ -20,7 +20,10 @@ searchButton.addEventListener('click', function () {
     .then(function (data) {
       console.log(data);
       Cityname.append(data.city.name);
-      console.log(data.list)
+      Temp.append(Math.round(data.list[0].main.temp));
+      Wind.append(data.list[0].wind.speed);
+      Humidity.append(data.list[0].main.humidity);
+      
       }
     );
 });
