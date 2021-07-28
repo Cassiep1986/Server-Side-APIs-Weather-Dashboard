@@ -6,12 +6,16 @@ var Temp = document.querySelector("#temp");
 var Wind = document.querySelector("#wind");
 var Humidity = document.querySelector("#humidity");
 var Uvindex = document.querySelector("#uv_index");
-var test = document.querySelector("#test");
-var savedCities = JSON.parse(localStoreage.getItem())
+var cityList = document.querySelector("#cityList");
+var savedcities = JSON.parse(localStorage.getItem("cities"))  ||  []
 
   function getWeather() {
+    cleardata();
+    savedcities.push(input.value);
+    localStorage.setItem("cities", JSON.stringify(savedcities));
+
     var city = input.value;
-  
+    
     var weatherurl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3301ee6fc116327db709dae75404298b&units=imperial`;
   
     fetch(weatherurl)
@@ -21,6 +25,7 @@ var savedCities = JSON.parse(localStoreage.getItem())
       })
       .then(function (data) {
         // console.log(data);
+        Cityname.value = "";
         Cityname.append(data.name);
         Temp.append("   " + (Math.round(data.main.temp)) + " \xB0 F") ;
         Wind.append("   " + (data.wind.speed) + " mph");
@@ -40,6 +45,7 @@ var savedCities = JSON.parse(localStoreage.getItem())
           Uvindex.append("   " + (data.current.uvi));
           forecastFive(data);
           getdates();
+          document.querySelector("input").value = "";
         })
       });
   };
@@ -92,6 +98,18 @@ var savedCities = JSON.parse(localStoreage.getItem())
         smtwtfs.append(SMTWTFS);
     }; 
     }
+
+    const logCities = function() {
+      savedcities.forEach(function(city) {
+          cityList.innerHTML += `<p>${city}</p>`
+      })
+  }
+
+  function cleardata() {
+
+  }
+
+  logCities()
 
 
   searchButton.addEventListener("click", getWeather);
