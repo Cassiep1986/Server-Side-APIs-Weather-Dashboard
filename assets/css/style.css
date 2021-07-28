@@ -19,3 +19,8 @@ p {
 li {
     list-style-type: none;
 }
+
+body {
+    background-color: rgb(160, 180, 196);
+}
+
